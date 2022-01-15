@@ -1,13 +1,20 @@
 package com.mrizak;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import java.util.List;
+
+public class App {
+    public static void main(String[] args) {
+        Grid grid = Grid.create(10, new StandardRules());
+        grid.applyInitialDisposition(new InitialDisposition(List.of(
+                new Coordinates(3, 4),
+                new Coordinates(3, 5),
+                new Coordinates(3, 6)
+        )));
+        grid.display();
+        grid.nextGeneration();
+        grid.display();
+        grid.nextGeneration();
+        grid.display();
+        grid.nextGeneration();
     }
 }
