@@ -14,6 +14,10 @@ public final class Grid {
         this.gameRules = gameRules;
     }
 
+    public List<List<Cell>> getCells() {
+        return cells;
+    }
+
     public static Grid create(int size, GameRules gameRules) {
         List<List<Cell>> cells = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -83,6 +87,8 @@ public final class Grid {
     }
 
     public void applyInitialDisposition(InitialDisposition initialDisposition) {
+        if (generation != 1)
+            throw new UnsupportedOperationException("Cannot set initial disposition if game already started");
         for (Coordinates coordinate : initialDisposition.getCoordinates()) {
             cells.get(coordinate.getX()).get(coordinate.getY()).setStatus(CellStatus.ALIVE);
         }
