@@ -86,11 +86,22 @@ public final class Grid {
         return result;
     }
 
-    public void applyInitialDisposition(InitialDisposition initialDisposition) {
+    public void applyInitialDisposition(Disposition initialDisposition) {
         if (generation != 1)
             throw new UnsupportedOperationException("Cannot set initial disposition if game already started");
         for (Coordinates coordinate : initialDisposition.getCoordinates()) {
             cells.get(coordinate.getX()).get(coordinate.getY()).setStatus(CellStatus.ALIVE);
         }
+    }
+
+    public boolean isEqualTo(Disposition disposition) {
+        for (List<Cell> cell : cells) {
+            for (Cell cell1 : cell) {
+                if ((disposition.getCoordinates().contains(cell1.getCoordinates()) && cell1.getStatus() != CellStatus.ALIVE) ||
+                        (!disposition.getCoordinates().contains(cell1.getCoordinates()) && cell1.getStatus() == CellStatus.ALIVE))
+                    return false;
+            }
+        }
+        return true;
     }
 }

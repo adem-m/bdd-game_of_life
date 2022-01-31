@@ -5,8 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-import java.util.List;
-
 public class Blinker {
     private Grid grid;
 
@@ -23,9 +21,6 @@ public class Blinker {
 
     @Then("I should have a vertical blinker")
     public void iShouldHaveAVerticalBlinker() {
-        List<List<Cell>> cells = grid.getCells();
-        Assert.assertEquals(CellStatus.ALIVE, cells.get(2).get(5).getStatus());
-        Assert.assertEquals(CellStatus.ALIVE, cells.get(3).get(5).getStatus());
-        Assert.assertEquals(CellStatus.ALIVE, cells.get(4).get(5).getStatus());
+        Assert.assertTrue(grid.isEqualTo(Personas.VERTICAL_BLINKER));
     }
 }
