@@ -13,11 +13,7 @@ public class Blinker {
     @Given("a horizontal blinker")
     public void aHorizontalBlinker() {
         grid = Grid.create(10, new StandardRules());
-        grid.applyInitialDisposition(new InitialDisposition(List.of(
-                new Coordinates(3, 4),
-                new Coordinates(3, 5),
-                new Coordinates(3, 6)
-        )));
+        grid.applyInitialDisposition(Personas.HORIZONTAL_BLINKER);
     }
 
     @When("I run a new generation")
