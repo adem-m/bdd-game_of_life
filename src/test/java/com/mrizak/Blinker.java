@@ -10,8 +10,8 @@ import java.util.List;
 public class Blinker {
     private Grid grid;
 
-    @Given("a vertical blinker")
-    public void aVerticalBlinker() {
+    @Given("a horizontal blinker")
+    public void aHorizontalBlinker() {
         grid = Grid.create(10, new StandardRules());
         grid.applyInitialDisposition(new InitialDisposition(List.of(
                 new Coordinates(3, 4),
@@ -25,8 +25,8 @@ public class Blinker {
         grid.nextGeneration();
     }
 
-    @Then("I should have a horizontal blinker")
-    public void iShouldHaveAHorizontalBlinker() {
+    @Then("I should have a vertical blinker")
+    public void iShouldHaveAVerticalBlinker() {
         List<List<Cell>> cells = grid.getCells();
         Assert.assertEquals(CellStatus.ALIVE, cells.get(2).get(5).getStatus());
         Assert.assertEquals(CellStatus.ALIVE, cells.get(3).get(5).getStatus());
