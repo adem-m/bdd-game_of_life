@@ -1,6 +1,11 @@
 Feature: A blinker is a period-2 oscillator
 
-  Scenario: Blinker is oscillating
-    Given a horizontal blinker
+  Scenario Outline: Blinker is oscillating
+    Given a <start> blinker
     When I run a new generation
-    Then I should have a vertical blinker
+    Then I should have a <result> blinker
+
+  Examples:
+    | start      | result     |
+    | horizontal | vertical   |
+    | vertical   | horizontal |
