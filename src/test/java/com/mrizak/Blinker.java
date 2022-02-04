@@ -1,24 +1,25 @@
 package com.mrizak;
 
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Assert;
 
 public class Blinker {
     private Grid grid;
-    private static Map<String, Disposition> dispositionMap = new HashMap<>();
 
-    @BeforeAll
-    public static void setDispositionMap() {
-        dispositionMap.put("horizontal", Personas.HORIZONTAL_BLINKER);
-        dispositionMap.put("vertical", Personas.VERTICAL_BLINKER);
+    @ParameterType(".*")
+    public Disposition disposition(String dispositionName) {
+        switch (dispositionName) {
+            case "horizontal":
+                return Personas.HORIZONTAL_BLINKER;
+            case "vertical":
+                return Personas.VERTICAL_BLINKER;
+            default:
+                throw new IllegalArgumentException("Unknown disposition " + dispositionName);
+        }
     }
 
     @Before
@@ -26,9 +27,9 @@ public class Blinker {
         grid = Grid.create(10, new StandardRules());
     }
 
-    @Given("a {string} blinker")
-    public void aHorizontalBlinker(String key) {
-        grid.applyInitialDisposition(dispositionMap.get(key));
+    @Given("a {disposition} blinker")
+    public void aStartBlinker(Disposition initial) {
+        grid.applyInitialDisposition(initial);
     }
 
     @When("I run a new generation")
@@ -36,8 +37,8 @@ public class Blinker {
         grid.nextGeneration();
     }
 
-    @Then("I should have a {string} blinker")
-    public void iShouldHaveAVerticalBlinker(String key) {
-        Assert.assertTrue(grid.isEqualTo(dispositionMap.get(key)));
+    @Then("I should have a {disposition} blinker")
+    public void iShouldHaveAnEndBlinker(Disposition end) {
+        Assert.assertTrue(grid.isEqualTo(end));
     }
 }

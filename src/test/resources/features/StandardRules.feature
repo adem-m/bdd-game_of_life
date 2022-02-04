@@ -25,4 +25,3 @@ Feature: Applying the standard game rules
         | dead    | 6   | dead  |
         | dead    | 7   | dead  |
         | dead    | 8   | dead  |
-        
