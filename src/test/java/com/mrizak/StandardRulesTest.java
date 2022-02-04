@@ -11,7 +11,7 @@ public class StandardRulesTest {
     private CellStatus currentStatus;
     private final GameRules rules = new StandardRules();
 
-    @ParameterType(".*")
+    @ParameterType("alive|dead")
     public CellStatus cellStatus(String statusName) {
         switch (statusName) {
             case "alive":

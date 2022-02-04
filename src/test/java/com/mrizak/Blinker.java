@@ -10,7 +10,7 @@ import org.junit.Assert;
 public class Blinker {
     private Grid grid;
 
-    @ParameterType(".*")
+    @ParameterType("horizontal|vertical")
     public Disposition disposition(String dispositionName) {
         switch (dispositionName) {
             case "horizontal":
