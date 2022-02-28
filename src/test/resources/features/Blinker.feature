@@ -1,4 +1,11 @@
 Feature: Blinker
+  A blinker is a 2-period oscillator.
+
+#    - - - - -       - - - - -      - - - - -
+#    - - - - -       - - X - -      - - - - -
+#    - X X X -   ->  - - X - -  ->  - X X X - 
+#    - - - - -       - - X - -      - - - - -
+#    - - - - -       - - - - -      - - - - -
 
   Background:
     Given the starting grid
