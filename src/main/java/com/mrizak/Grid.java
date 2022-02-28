@@ -18,6 +18,10 @@ public final class Grid {
         return cells;
     }
 
+    public Cell getCellAt(int x, int y) {
+        return this.cells.get(x).get(y);
+    }
+
     public static Grid create(int size, GameRules gameRules) {
         List<List<Cell>> cells = new ArrayList<>();
         for (int i = 0; i < size; i++) {
