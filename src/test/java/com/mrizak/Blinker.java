@@ -9,14 +9,19 @@ import org.junit.Assert;
 
 public class Blinker {
     private Grid grid;
+    private StartingGrid startingGrid;
+
+    public Blinker(StartingGrid startingGrid) {
+        this.startingGrid = startingGrid;
+    }
 
     @ParameterType("horizontal|vertical")
     public Disposition disposition(String dispositionName) {
         switch (dispositionName) {
             case "horizontal":
-                return Personas.HORIZONTAL_BLINKER;
+                return StartingGrid.HORIZONTAL_BAR;
             case "vertical":
-                return Personas.VERTICAL_BLINKER;
+                return StartingGrid.VERTICAL_BAR;
             default:
                 throw new IllegalArgumentException("Unknown disposition " + dispositionName);
         }
@@ -24,21 +29,24 @@ public class Blinker {
 
     @Before
     public void setGrid() {
-        grid = Grid.create(10, new StandardRules());
+        grid = this.startingGrid.grid;
+        grid.applyInitialDisposition(StartingGrid.HORIZONTAL_BAR);
     }
 
-    @Given("a {disposition} blinker")
-    public void aStartBlinker(Disposition initial) {
-        grid.applyInitialDisposition(initial);
+    @Given("{int} generation(s) have/has been produced")
+    public void generationProducedTime(int generations) {
+        for(int i = 0; i < generations; i++) {
+            grid.nextGeneration();
+        }
     }
 
-    @When("I run a new generation")
-    public void iRunANewGeneration() {
+    @When("the next generation is produced")
+    public void theNextGenerationIsProduced() {
         grid.nextGeneration();
     }
 
-    @Then("I should have a {disposition} blinker")
-    public void iShouldHaveAnEndBlinker(Disposition end) {
+    @Then("the blinker should be {disposition}")
+    public void theBlinkerShoudBeDisposition(Disposition end) {
         Assert.assertTrue(grid.isEqualTo(end));
     }
 }
