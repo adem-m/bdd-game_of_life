@@ -5,7 +5,6 @@ import org.junit.Assert;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.Assertions;
 
 public class HorizontalBar {
     private Grid grid;
@@ -40,7 +39,7 @@ public class HorizontalBar {
             CellStatus expectedStatus = this.cellStatus(dataLine.get("status"));
 
             System.out.println(expectedStatus.toString());
-            Assertions.assertSame(expectedStatus, this.grid.getCellAt(x, y).getStatus());
+            Assert.assertSame(expectedStatus, this.grid.getCellAt(x, y).getStatus());
         });
     }
 }
