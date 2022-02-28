@@ -11,7 +11,7 @@ Feature: Blinker
     Given the starting grid
 
   Scenario: first generation
-    Given 0 generations have been produced
+    Given 0 generation has been produced
     When the next generation is produced
     Then the blinker should be vertical 
 
